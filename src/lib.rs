@@ -2,21 +2,21 @@ use std::cmp::PartialOrd;
 use std::convert::AsMut;
 
 #[derive(Debug, Clone)]
-pub struct Node<T: PartialOrd + Clone, const N: usize> {
-    location: [T; N],
+pub struct Node<T: PartialOrd + Clone, const K: usize> {
+    location: [T; K],
     left_child: Option<Box<Self>>,
     right_child: Option<Box<Self>>,
 }
 
-pub fn build_tree<T: PartialOrd + Clone, const N: usize>(
-    mut points: impl AsMut<[[T; N]]>,
+pub fn build_tree<T: PartialOrd + Clone, const K: usize>(
+    mut points: impl AsMut<[[T; K]]>,
     depth: usize,
-) -> Option<Box<Node<T, N>>> {
-    let points: &mut [[T; N]] = points.as_mut();
+) -> Option<Box<Node<T, K>>> {
+    let points: &mut [[T; K]] = points.as_mut();
     if points.is_empty() {
         None
     } else {
-        let axis = depth % N;
+        let axis = depth % K;
         points
             .sort_unstable_by(|a, b| a[axis].partial_cmp(&b[axis]).expect("`partial_cmp` failed"));
         let median_loc = points.len() / 2;
