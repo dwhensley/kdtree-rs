@@ -1,5 +1,12 @@
-use std::cmp::PartialOrd;
-use std::convert::AsMut;
+#![no_std]
+
+use core::cmp::PartialOrd;
+use core::convert::AsMut;
+
+extern crate alloc;
+use alloc::boxed::Box;
+
+pub mod arena;
 
 #[derive(Debug, Clone)]
 pub struct Node<T: PartialOrd + Clone, const K: usize> {

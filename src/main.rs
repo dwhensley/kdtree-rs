@@ -1,4 +1,7 @@
-use kdtree::build_tree;
+use kdtree::{arena::SimpleAllocator, build_tree};
+
+#[global_allocator]
+static ALLOCATOR: SimpleAllocator = SimpleAllocator::default();
 
 fn main() {
     let mut integer_points_2d: Vec<[usize; 2]> =
